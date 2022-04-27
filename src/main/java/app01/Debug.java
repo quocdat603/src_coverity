@@ -55,4 +55,20 @@ public class Debug {
 		l_objInStream.close();
 		l_objOutStream.close();
 	}
+	
+	public static void getLogFile1(String theFile, HttpServletResponse theResponse)
+			throws ServletException, IOException {
+		// According to log4j.appender.FILE.File setting from log4j.properties
+		// Only the log files are needed, 
+		String l_strLogFolder = System.getProperty("catalina.base") + "/logs/";
+		File l_objLogFile = new File(l_strLogFolder + theFile);
+		// Read the log file
+		theResponse.setContentType("application/octet-stream");
+		// String l_strName = l_objLogFile.getName().replaceAll("\\W", "");
+		
+		theResponse.setHeader("Content-Disposition", "filename=\"" + l_objLogFile.getName().replaceAll("\\W", "") + "\"");
+		FileInputStream l_objInStream = new FileInputStream(l_objLogFile);
+		
+		l_objInStream.close();
+	}	
 }
