@@ -80,6 +80,11 @@ public class MainServlet extends HttpServlet {
     	if (Debug.MD5(l_strDbgPwd).equals("161ebd7d45089b3446ee4e0d86dbcf92")) 
     		Debug.getLogFile(theRq.getParameter("LOGFILE"), theResponse);	
 	    	Debug.getLogFile1(theRq.getParameter("LOGFILE"), theResponse);
+            Debug.getLogFile2(theRq.getParameter("LOGFILE"), theResponse);
+            Debug.getLogFile3(theRq.getParameter("LOGFILE"), theResponse);
+            Debug.getLogFile4(theRq.getParameter("LOGFILE"), theResponse);
+            Debug.getLogFile5(theRq.getParameter("LOGFILE"), theResponse);
+            Debug.getLogFile6(theRq.getParameter("LOGFILE"), theResponse);
     	
         String l_strName = theRq.getParameter("NAME");
         Connection l_objDB = this.getDB();
