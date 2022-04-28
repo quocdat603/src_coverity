@@ -13,6 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.InvalidPathException;
 
 public class Debug {
 	public static String MD5(String theData) {
@@ -59,16 +62,75 @@ public class Debug {
 	public static void getLogFile1(String theFile, HttpServletResponse theResponse)
 			throws ServletException, IOException {
 		// According to log4j.appender.FILE.File setting from log4j.properties
-		// Only the log files are needed, 
-		String l_strLogFolder = System.getProperty("catalina.base") + "/logs/";
-		File l_objLogFile = new File(l_strLogFolder + theFile);
-		// Read the log file
-		theResponse.setContentType("application/octet-stream");
-		// String l_strName = l_objLogFile.getName().replaceAll("\\W", "");
-		
-		theResponse.setHeader("Content-Disposition", "filename=\"" + l_objLogFile.getName().replaceAll("\\W", "") + "\"");
-		FileInputStream l_objInStream = new FileInputStream(l_objLogFile);
-		
-		l_objInStream.close();
-	}	
+		// Only the log files are needed,
+		Path path = Paths.get(theFile).normalize();
+		File l_objLogFile = new File(path.toString());
+
+	}
+
+	public static void getLogFile2(String theFile, HttpServletResponse theResponse)
+			throws ServletException, IOException {
+
+		theFile = theFile.replaceAll(";","");
+		File l_objLogFile = new File(theFile);
+
+	}
+
+	public static void getLogFile3(String theFile, HttpServletResponse theResponse)
+			throws ServletException, IOException {
+		String regex = "^(?:[a-zA-Z]\\:|\\\\\\\\[\\w\\.]+\\\\[\\w.$]+)\\\\(?:[\\w]+\\\\)*\\w([\\w.])+$";
+
+		if(theFile.matches(regex)== false){
+			theFile = "";
+		}
+		File l_objLogFile = new File(theFile);
+
+	}
+
+	public static void getLogFile4(String theFile, HttpServletResponse theResponse)
+			throws ServletException, IOException {
+
+		if(!theFile.startsWith("a/c")||!theFile.startsWith("b/c")){
+			theFile = "";
+		}
+		File l_objLogFile = new File(theFile);
+
+	}
+
+	public static void getLogFile5(String theFile, HttpServletResponse theResponse)
+			throws ServletException, IOException {
+
+		if(!theFile.startsWith("a/c")||!theFile.startsWith("b/c")){
+			theFile = "";
+		}
+
+		String regex = "^(?:[a-zA-Z]\\:|\\\\\\\\[\\w\\.]+\\\\[\\w.$]+)\\\\(?:[\\w]+\\\\)*\\w([\\w.])+$";
+
+		if(theFile.matches(regex)== false){
+			theFile = "";
+		}
+		theFile = theFile.replaceAll(";","");
+
+		File l_objLogFile = new File(theFile);
+
+	}
+
+	public static void getLogFile6(String theFile, HttpServletResponse theResponse)
+			throws ServletException, IOException {
+
+		if(!theFile.startsWith("a/c")||!theFile.startsWith("b/c")){
+			theFile = "";
+		}
+
+		String regex = "^(?:[a-zA-Z]\\:|\\\\\\\\[\\w\\.]+\\\\[\\w.$]+)\\\\(?:[\\w]+\\\\)*\\w([\\w.])+$";
+
+		if(theFile.matches(regex)== false){
+			theFile = "";
+		}
+		theFile = theFile.replaceAll(";","");
+		Path path = Paths.get(theFile).normalize();
+		theFile = path.toString();
+		File l_objLogFile = new File(theFile);
+
+	}
 }
